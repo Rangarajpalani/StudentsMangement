@@ -1,0 +1,70 @@
+﻿@page
+@using System.Collections;
+@model StudentsMangement.Pages.Clazzes.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Class Details</h4>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Clazz[0].Section)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clazz[0].StudentCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clazz[0].StaffCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clazz[0].Properties)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clazz[0].Staffs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Clazz) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Section)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StaffCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Properties)
+            </td>
+                <td>
+                    @if (item.Staffs != null)
+                    {
+                        var StaffList = new ArrayList();
+                        foreach (var staff in @item.Staffs)
+                        {
+                            StaffList.Add(staff.Name);
+                        }
+                        var Staffs = String.Join(",",StaffList.ToArray());
+                        @Html.DisplayFor(modelItem => Staffs)
+                    }
+                </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

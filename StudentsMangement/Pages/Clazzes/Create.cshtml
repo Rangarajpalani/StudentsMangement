@@ -1,0 +1,70 @@
+﻿@page
+@model StudentsMangement.Pages.Clazzes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Clazz</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Clazz.Section" class="control-label"></label>
+                <input asp-for="Clazz.Section" class="form-control" />
+                <span asp-validation-for="Clazz.Section" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clazz.StudentCount" class="control-label"></label>
+                <input asp-for="Clazz.StudentCount" class="form-control" />
+                <span asp-validation-for="Clazz.StudentCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clazz.StaffCount" class="control-label"></label>
+                <input asp-for="Clazz.StaffCount" class="form-control" />
+                <span asp-validation-for="Clazz.StaffCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clazz.Properties" class="control-label"></label>
+                <textarea asp-for="Clazz.Properties" class="form-control"></textarea>
+                <span asp-validation-for="Clazz.Properties" class="text-danger"></span>
+            </div>
+            <div >
+                <form method="post">
+                Staffs:
+                <br />
+
+                <select name="StaffIds"  asp-items="Model.Staffs" multiple="multiple" class="listbox"></select>
+                <br />
+                <input type="submit" value=" Submit" asp-page-handler="Submit"/>
+                    
+                </form>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+                        $(function () {
+                            $('.listbox').multiselect({
+                                includeSelectAllOptin: true
+                            });
+                        });
+
+                    </script>
+    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
